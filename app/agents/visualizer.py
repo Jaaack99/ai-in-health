@@ -68,6 +68,6 @@ def generate_description_from_topic(topic: str) -> str:
     Generates a simple caption based on the topic.
     """
     return textwrap.fill(
-        f"This graph supports the topic: '{topic}'. It visualizes one aspect of how AI can be applied in this area using simplified, illustrative data.",
+        f"This graph supports the topic: '{topic}'. It visualizes one aspect of how AI can be applied in this area using simplified and fictitious data for illustrative purpose.",
         width=80
     )

@@ -3,17 +3,20 @@ from agents.explainer import get_explanation_and_options
 from agents.visualizer import generate_graph_and_description
 from dotenv import load_dotenv
 import os
+import textwrap
 
+# Load environment variables
 load_dotenv()
 
-# Optional: make sure the key is present, or exit
+# Check API key
 if not os.getenv("OPENAI_API_KEY"):
     st.error("❌ Missing OpenAI API Key. Please check your .env file.")
     st.stop()
 
+# App layout
 st.set_page_config(layout="wide", page_title="AI in Health", page_icon="🧬")
 
-# Session state
+# Initialize session state
 if "submitted" not in st.session_state:
     st.session_state.submitted = False
     st.session_state.explanation = ""
@@ -25,11 +28,13 @@ if "submitted" not in st.session_state:
     st.session_state.education = "University"
     st.session_state.tone = "informative"
 
-st.title("🧬 Welcome to the AI in Health Demo")
+# App UI
+st.title("🧬 Welcome to the AI in Health Demo!")
 
-st.markdown("### 👋 Hello! What would you like to know about AI in health?")
+st.markdown("### 👋 What would you like to know about AI in health?")
 question = st.text_input("Your question")
 
+# User form
 with st.form("user_info_form"):
     col1, col2, col3 = st.columns(3)
 
@@ -40,18 +45,26 @@ with st.form("user_info_form"):
         education = st.selectbox("Education level", ["Primary", "Secondary", "University", "PhD"])
 
     with col3:
-        tone = st.radio("Answer style", ["Informative", "Technical"])
+        tone = st.radio("Answer style", ["Informative (for a more generic answer)", "Scientific (for a more technical answer)"])
 
     submitted = st.form_submit_button("Submit")
 
+# On submit: get first explanation + graph
+# On submit: reset previous outputs and get new explanation + graph
 if submitted and question:
-    # Save inputs to session state
     st.session_state.submitted = True
     st.session_state.age = age
     st.session_state.education = education
     st.session_state.tone = tone.lower()
 
-    # Get explanation + follow-ups
+    # Clear old outputs
+    st.session_state.explanation = ""
+    st.session_state.options = []
+    st.session_state.selected_topic = ""
+    st.session_state.fig = None
+    st.session_state.graph_description = ""
+
+    # Get new explanation and visuals
     st.session_state.explanation, st.session_state.options = get_explanation_and_options(
         question=question,
         age=age,
@@ -59,16 +72,23 @@ if submitted and question:
         tone=tone.lower()
     )
 
-    # Generate initial graph
     st.session_state.fig, st.session_state.graph_description = generate_graph_and_description(question)
 
-# After submission
+# Main response display
 if st.session_state.submitted:
-    col_left, col_right = st.columns([2, 3])
+    col_left, _, col_right = st.columns([2, 0.5, 3])
 
     with col_left:
         st.subheader("📘 Explanation")
-        st.markdown(st.session_state.explanation)
+        st.markdown(" ")  # space below title
+        wrapped_explanation = f"""
+        <div style='text-align: justify; max-width: 650px;'>
+            {st.session_state.explanation}
+        </div>
+        """
+        st.markdown(wrapped_explanation, unsafe_allow_html=True)
+
+
 
         st.subheader("🔍 Explore further:")
         for opt in st.session_state.options:
@@ -78,6 +98,7 @@ if st.session_state.submitted:
     with col_right:
         if st.session_state.fig:
             st.subheader("📊 Visual support")
+            st.markdown(" ")  # space below title
             st.pyplot(st.session_state.fig)
             st.caption(st.session_state.graph_description)
 
@@ -92,14 +113,24 @@ if st.session_state.selected_topic:
         education=st.session_state.education,
         tone=st.session_state.tone
     )
-    st.markdown(deeper_explanation)
 
-    deeper_fig, deeper_desc = generate_graph_and_description(st.session_state.selected_topic)
-    if deeper_fig:
-        st.pyplot(deeper_fig)
-        st.caption(deeper_desc)
-    else:
-        st.warning("⚠️ Couldn’t generate a graph for the selected topic.")
+    col_deep_left, _, col_deep_right = st.columns([2, 0.5, 3])
 
-    # Reset so user can click other topics later
-    st.session_state.selected_topic = ""
+    with col_deep_left:
+        st.markdown(" ")
+        wrapped_deeper_explanation = f"""
+        <div style='text-align: justify; max-width: 650px;'>
+            {deeper_explanation}
+        </div>
+        """
+        st.markdown(wrapped_deeper_explanation, unsafe_allow_html=True)
+
+
+    with col_deep_right:
+        st.markdown(" ")
+        deeper_fig, deeper_desc = generate_graph_and_description(st.session_state.selected_topic)
+        if deeper_fig:
+            st.pyplot(deeper_fig)
+            st.caption(deeper_desc)
+        else:
+            st.warning("⚠️ Couldn’t generate a graph for the selected topic.")

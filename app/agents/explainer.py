@@ -16,8 +16,8 @@ def get_explanation_and_options(question: str, age: int, education: str, tone: s
     tone_instruction = (
         "Use a simple, clear, and engaging tone suitable for a general audience. "
         "Avoid jargon and explain concepts as if to a curious student."
-        if tone == "informative"
-        else "Use a precise and technical tone suitable for an educated reader familiar with scientific terminology."
+        if tone == "Informative (for a more generic answer)"
+        else "Use a very precise tone employing technical vocabulary suitable for an educated reader familiar with scientific terminology."
     )
 
     # Age-based simplification guidance
@@ -26,7 +26,7 @@ def get_explanation_and_options(question: str, age: int, education: str, tone: s
     elif age < 25 and education in ["Primary", "Secondary"]:
         audience_note = "Explain the topic in simple and relatable terms, avoiding technical words."
     elif education in ["University", "PhD"]:
-        audience_note = "Feel free to include moderate to advanced technical details."
+        audience_note = "Include moderate to advanced technical details."
     else:
         audience_note = "Keep the explanation clear and easy to follow."
 
@@ -66,7 +66,12 @@ def get_explanation_and_options(question: str, age: int, education: str, tone: s
             elif line.strip():
                 explanation_lines.append(line.strip())
 
-        explanation = " ".join(explanation_lines)
+        # Filter out known headings like "Related Subtopics to Explore"
+        cleaned_lines = [
+            line for line in explanation_lines
+            if "related subtopics" not in line.lower()
+        ]
+        explanation = " ".join(cleaned_lines)
         return explanation, options[:3]  # Limit to max 3 options
 
     except Exception as e:
