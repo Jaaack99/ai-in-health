@@ -26,7 +26,7 @@ if "submitted" not in st.session_state:
     st.session_state.graph_description = ""
     st.session_state.age = 30
     st.session_state.education = "University"
-    st.session_state.tone = "informative"
+    st.session_state.tone = "Informative (for a more generic answer)"
 
 # App UI
 st.title("🧬 Welcome to the AI in Health Demo!")
