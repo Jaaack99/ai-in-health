@@ -26,7 +26,7 @@ The prototype is organized around two modular **AI agents**, each fulfilling a d
 
 ---
 
-## How to Run the App - Linux + OpenAI Setup (assumes Git is installed)
+## How to Run the App - Linux + OpenAI API Setup (assumes Git is installed)
 
 1. **Clone the repository**
 
