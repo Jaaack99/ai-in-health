@@ -26,7 +26,7 @@ The prototype is organized around two modular **AI agents**, each fulfilling a d
 
 ---
 
-## How to Run the App
+## How to Run the App - Linux + OpenAI Setup (assumes Git is installed)
 
 1. **Clone the repository**
 
@@ -40,13 +40,13 @@ git clone https://github.com/Jaaack99/ai-in-health.git
 cd ai-in-health
 ```
 
-3. **Create and activate a virtual environment (optional)**
+3. **Create and activate a virtual environment**
 
 ```bash
 python -m venv venv
 ```
 ```bash
-venv\Scripts\activate
+source venv/bin/activate
 ```
 
 4. **Install dependencies**
