@@ -126,10 +126,3 @@ The takeaway? **AI is a brilliant pair programmer**, but it’s not yet a replac
 - [Python-dotenv](https://pypi.org/project/python-dotenv/) – API key management
 
 ---
-
-## 📄 License
-
-MIT License
-
----
-
