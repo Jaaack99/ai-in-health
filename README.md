@@ -25,6 +25,36 @@ The prototype is organized around two modular **AI agents**, each fulfilling a d
 - **Execution:** Code is run safely in a sandboxed scope.
 
 ---
+## 🐳 How to Run the App - Docker
+
+1. **Install and Launch Docker Desktop**
+
+2. **Clone the repository**
+
+```bash
+git clone https://github.com/Jaaack99/ai-in-health.git
+```
+
+3. **Navigate to the folder**
+
+```bash
+cd ai-in-health
+```
+
+4. **Create a .env file in the root directory with your OpenAI API key**
+
+```bash
+echo "OPENAI_API_KEY=your-openai-key-here" > .env
+```
+
+5. **Run the app through Docker**
+
+```bash
+docker-compose up --build
+```
+
+6. **Access the app through the Local URL link**
+
 
 ## How to Run the App - Linux + OpenAI API Setup (assumes Git is installed)
 
@@ -66,6 +96,8 @@ echo OPENAI_API_KEY=your-key-here > .env
 ```bash
 streamlit run app/main.py
 ```
+
+6. **Access the app through the Local URL link**
 
 ---
 
