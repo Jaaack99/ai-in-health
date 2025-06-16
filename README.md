@@ -12,14 +12,14 @@ The prototype is organized around two modular **AI agents**, each fulfilling a d
 
 - **Powered by:** OpenAI `gpt-4o`
 - **Function:** Produces a clear, age- and education-tailored explanation of any user-submitted question about AI in health.
-- **Tone Adaptation:** Based on user selection ("Informative" or "Technical").
+- **Tone Adaptation:** Based on user selection ("Informative" or "Scientific").
 - **Output:** 
   - A short educational paragraph
   - 2–3 suggested subtopics for further exploration
 
 ### 2. Visualizer Agent
 
-- **Powered by:** The same LLM
+- **Powered by:** OpenAI `gpt-4o`
 - **Function:** Converts a health-related AI concept into working `matplotlib` code.
 - **Output:** A meaningful, simplified visualization that reinforces the main idea.
 - **Execution:** Code is run safely in a sandboxed scope.
@@ -40,19 +40,28 @@ git clone https://github.com/Jaaack99/ai-in-health.git
 cd ai-in-health
 ```
 
-3. **Install dependencies**
+3. **Create and activate a virtual environment (optional)**
+
+```bash
+python -m venv venv
+```
+```bash
+venv\Scripts\activate
+```
+
+4. **Install dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. **Create a .env file in the root directory to host your OpenAI API key**
+5. **Create a .env file in the root directory with your OpenAI API key**
 
 ```bash
-OPENAI_API_KEY=yourkey
+echo OPENAI_API_KEY=your-key-here > .env
 ```
 
-5. **Run the app**
+6. **Run the app**
 
 ```bash
 streamlit run app/main.py
@@ -64,7 +73,7 @@ streamlit run app/main.py
 
 1. **Ask a question** about AI in healthcare.
 2. **Enter your age and education level** to personalize the explanation.
-3. **Choose a tone**: Informative (general public) or Technical (scientific).
+3. **Choose a tone**: Informative (general public) or Scientific (more technical).
 4. **Review the response**:
    - 📘 An explanation appears on the left.
    - 📊 A dynamic graph appears on the right.
@@ -103,7 +112,7 @@ Building this app highlighted the **power of generative AI for fast idea-to-prot
 
 In this case:
 - **AI sped me up** when brainstorming layouts, writing modular Python, and generating example visualizations.
-- **AI misled me** when I trusted it to generate bug-free `matplotlib` code or markdown with consistent structure.
+- **AI misled me** when I trusted it to generate bug-free `matplotlib` code or markdown with consistent structure. It also misled me on fixing some very easy code bugs, which I eventually resolved manually.
 
 The takeaway? **AI is a brilliant pair programmer**, but it’s not yet a replacement for *your* judgment, debugging, and interface design skills.
 
