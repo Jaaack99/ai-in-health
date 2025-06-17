@@ -25,7 +25,10 @@ The prototype is organized around two modular **AI agents**, each fulfilling a d
 - **Execution:** Code is run safely in a sandboxed scope.
 
 ---
-## 🐳 How to Run the App - Docker
+
+## The App Requires a Linux + OpenAI API Key Setup (and assumes Git is installed)
+
+## 🐳 How to Run the App with Docker
 
 1. **Install and Launch Docker Desktop**
 
@@ -56,7 +59,7 @@ docker-compose up --build
 6. **Access the app through the Local URL link**
 
 
-## How to Run the App - Linux + OpenAI API Setup (assumes Git is installed)
+## How to Run the App Manually
 
 1. **Clone the repository**
 
@@ -146,7 +149,7 @@ In this case:
 - **AI sped me up** when brainstorming layouts, writing modular Python, and generating example visualizations.
 - **AI misled me** when I trusted it to generate bug-free `matplotlib` code or markdown with consistent structure. It also misled me on fixing some very easy code bugs, which I eventually resolved manually.
 
-The takeaway? **AI is a brilliant pair programmer**, but it’s not yet a replacement for *your* judgment, debugging, and interface design skills.
+The takeaway? **AI is a brilliant pair programmer**, but it’s not yet a replacement for *my owm* judgment, debugging, and interface design skills.
 
 ---
 
